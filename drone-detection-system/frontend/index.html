@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STENDR-DEMO · Counter-UAS Tactical View</title>
+
+  <!-- Leaflet for the map -->
+  <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin="" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo-mark"></span>
+      <span class="brand-name">STENDR·DEMO</span>
+      <span class="brand-sub">Counter-UAS Tactical View</span>
+    </div>
+    <div class="status-cluster">
+      <div class="status-item">
+        <span class="label">SWARM</span>
+        <span id="status-swarm" class="value">—</span>
+      </div>
+      <div class="status-item">
+        <span class="label">MIN·SEP</span>
+        <span id="status-minsep" class="value">—</span>
+      </div>
+      <div class="status-item">
+        <span class="label">SELECTED</span>
+        <span id="status-selected" class="value">—</span>
+      </div>
+      <div class="status-item">
+        <span class="label">INF</span>
+        <span id="status-infer" class="value">—</span>
+      </div>
+      <div class="status-dot" id="status-link" title="link status"></div>
+    </div>
+  </header>
+
+  <!-- Main split layout -->
+  <main class="split">
+    <!-- LEFT: Tactical map -->
+    <section class="pane pane-map">
+      <div class="pane-header">
+        <span class="pane-title">01 · TACTICAL MAP</span>
+        <span class="pane-meta">OSLO·OPS-AREA</span>
+      </div>
+      <div id="map"></div>
+      <div class="pane-footer">
+        <span class="footer-key">●</span> drone &nbsp;
+        <span class="footer-key">▲</span> camera cone &nbsp;
+        <span class="footer-key">━</span> route
+      </div>
+    </section>
+
+    <!-- RIGHT: Camera feed -->
+    <section class="pane pane-camera">
+      <div class="pane-header">
+        <span class="pane-title">02 · DRONE FEED <span id="feed-drone-id" class="pane-accent">—</span></span>
+        <span class="pane-meta" id="feed-fps">— fps</span>
+      </div>
+      <div class="camera-wrap">
+        <div class="camera-grid"></div>
+        <img id="camera-img" alt="drone camera feed" />
+        <canvas id="detection-canvas"></canvas>
+        <div class="crosshair"></div>
+        <div class="reticle-tl"></div>
+        <div class="reticle-tr"></div>
+        <div class="reticle-bl"></div>
+        <div class="reticle-br"></div>
+        <div id="camera-empty" class="camera-empty">
+          NO VIDEO IN data/videos/<br/>
+          <span class="dim">run scripts/download_youtube.py</span>
+        </div>
+      </div>
+      <div class="pane-footer">
+        <span id="detection-summary">no detections</span>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom panel: stats -->
+  <section class="bottom-panel">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-label">Detection rate</div>
+        <div class="stat-value" id="stat-rate">—</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Frames processed</div>
+        <div class="stat-value" id="stat-frames">—</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Peak concurrent</div>
+        <div class="stat-value" id="stat-peak">—</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Avg confidence</div>
+        <div class="stat-value" id="stat-conf">—</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Effective FPS</div>
+        <div class="stat-value" id="stat-fps">—</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">p95 inference</div>
+        <div class="stat-value" id="stat-p95">—</div>
+      </div>
+    </div>
+    <div class="session-note">
+      <span id="session-note-text">SESSION ACTIVE · stats accumulate until video loop</span>
+    </div>
+  </section>
+
+  <!-- End-of-video modal -->
+  <div id="summary-modal" class="modal hidden">
+    <div class="modal-inner">
+      <div class="modal-header">
+        <span>SESSION SUMMARY</span>
+        <button id="modal-close">CLOSE</button>
+      </div>
+      <pre id="modal-body">—</pre>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+          crossorigin=""></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

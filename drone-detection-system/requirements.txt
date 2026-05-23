@@ -1,0 +1,22 @@
+# Core ML
+ultralytics>=8.3.0          # YOLO11 — supports detection, tracking, classification
+torch>=2.1.0
+torchvision>=0.16.0
+
+# Dataset & video downloads
+huggingface_hub>=0.20.0     # Pre-trained drone weights — no auth, just HTTPS
+kagglehub>=0.2.0            # Optional: full dataset for fine-tuning
+yt-dlp>=2026.3.17           # YouTube footage retrieval
+opencv-python>=4.9.0
+numpy>=1.24.0
+Pillow>=10.0.0
+
+# Backend
+fastapi>=0.110.0
+uvicorn[standard]>=0.27.0
+websockets>=12.0
+python-multipart>=0.0.9
+
+# Utilities
+pydantic>=2.6.0
+python-dotenv>=1.0.0
