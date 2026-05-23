@@ -103,4 +103,4 @@ drone-detection-system/
 
 ## Why this matters for defence tech
 
-This project demonstrates the core capability behind modern counter-drone systems: turning raw camera feeds into trustable operator-grade situational awareness. It mirrors the sensor-fusion and tactical-display logic that companies like Stendr build at industrial scale.
+This project demonstrates the core capability behind modern counter-drone systems: turning raw camera feeds into trustable operator-grade situational awareness. It mirrors the sensor-fusion and tactical-display logic that companies build at industrial scale.
